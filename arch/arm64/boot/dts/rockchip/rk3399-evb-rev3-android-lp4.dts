@@ -1,0 +1,137 @@
+/*
+ * Copyright (c) 2017 Fuzhou Rockchip Electronics Co., Ltd
+ *
+ * SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+ */
+
+/dts-v1/;
+
+#include "rk3399-evb-rev3.dtsi"
+#include "rk3399-android.dtsi"
+
+/ {
+	model = "Rockchip RK3399 Evaluation Board v3 (Android) LPDDR4";
+	compatible = "rockchip,android", "rockchip,rk3399-evb-rev3-android-lp4", "rockchip,rk3399";
+
+	/* first 64k(0xff8c0000~0xff8d0000) for ddr and suspend */
+	iram: sram@ff8d0000 {
+		compatible = "mmio-sram";
+		reg = <0x0 0xff8d0000 0x0 0x20000>; /* 128k */
+	};
+};
+
+&dmac_bus {
+	iram = <&iram>;
+	rockchip,force-iram;
+};
+
+&dsi {
+	status = "okay";
+
+	panel@0 {
+		compatible ="simple-panel-dsi";
+		reg = <0>;
+		backlight = <&backlight>;
+		enable-gpios = <&gpio1 13 GPIO_ACTIVE_HIGH>;
+
+		dsi,flags = <(MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST)>;
+		dsi,format = <MIPI_DSI_FMT_RGB888>;
+		dsi,lanes = <4>;
+
+		display-timings {
+			native-mode = <&timing0>;
+
+			timing0: timing0 {
+				clock-frequency = <160000000>;
+				hactive = <1200>;
+				vactive = <1920>;
+				hback-porch = <21>;
+				hfront-porch = <120>;
+				vback-porch = <18>;
+				vfront-porch = <21>;
+				hsync-len = <20>;
+				vsync-len = <3>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <0>;
+				pixelclk-active = <0>;
+			};
+		};
+	};
+};
+
+&cdn_dp {
+	extcon = <&fusb0>, <&fusb1>;
+	status = "okay";
+};
+
+&route_dsi {
+	status = "okay";
+};
+
+&dfi {
+	status = "okay";
+};
+
+&dmc {
+	status = "okay";
+	center-supply = <&vdd_center>;
+	system-status-freq = <
+		/*system status         freq(KHz)*/
+		SYS_STATUS_NORMAL       800000
+		SYS_STATUS_REBOOT       400000
+		SYS_STATUS_SUSPEND      400000
+		SYS_STATUS_VIDEO_1080P  400000
+		SYS_STATUS_VIDEO_4K     800000
+		SYS_STATUS_VIDEO_4K_10B 800000
+		SYS_STATUS_PERFORMANCE  800000
+		SYS_STATUS_BOOST        400000
+		SYS_STATUS_DUALVIEW     800000
+		SYS_STATUS_ISP          800000
+	>;
+	auto-min-freq = <400000>;
+	auto-freq-en = <0>;
+};
+
+&dmc_opp_table {
+	compatible = "operating-points-v2";
+
+	opp-200000000 {
+		opp-hz = /bits/ 64 <200000000>;
+		opp-microvolt = <825000>;
+		status = "disabled";
+	};
+	opp-300000000 {
+		opp-hz = /bits/ 64 <300000000>;
+		opp-microvolt = <850000>;
+		status = "disabled";
+	};
+	opp-400000000 {
+		opp-hz = /bits/ 64 <400000000>;
+		opp-microvolt = <900000>;
+	};
+	opp-528000000 {
+		opp-hz = /bits/ 64 <528000000>;
+		opp-microvolt = <900000>;
+		status = "disabled";
+	};
+	opp-600000000 {
+		opp-hz = /bits/ 64 <600000000>;
+		opp-microvolt = <900000>;
+		status = "disabled";
+	};
+	opp-800000000 {
+		opp-hz = /bits/ 64 <800000000>;
+		opp-microvolt = <900000>;
+	};
+	opp-928000000 {
+		opp-hz = /bits/ 64 <928000000>;
+		opp-microvolt = <900000>;
+		status = "disabled";
+	};
+	opp-1056000000 {
+		opp-hz = /bits/ 64 <1056000000>;
+		opp-microvolt = <900000>;
+		status = "disabled";
+	};
+};
