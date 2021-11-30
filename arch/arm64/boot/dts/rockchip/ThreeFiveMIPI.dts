@@ -770,7 +770,7 @@ spdif-sound {
                 touch-gpio = <&gpio4 29 IRQ_TYPE_LEVEL_LOW>;
                 reset-gpio = <&gpio4 30 GPIO_ACTIVE_HIGH>;
                 tp-supply = <&vcc3v0_tp>;
-                status = "okay";
+                status = "disabled";
         };
 };
 
