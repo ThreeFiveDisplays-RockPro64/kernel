@@ -911,7 +911,7 @@ spdif-sound {
 				hactive = <800>;
 				vactive = <1280>;
 				hback-porch = <5>;
-				hfront-porch = <270>;
+				hfront-porch = <272>;
 				vback-porch = <20>;
 				vfront-porch = <20>;
 				hsync-len = <2>;
