@@ -876,7 +876,7 @@ spdif-sound {
 
 &dsi {
 	status = "okay";
-  rockchip,lane-rate = <480>;
+  rockchip,lane-rate = <550>;
 
 	panel@0 {
 		compatible ="simple-panel-dsi";
@@ -911,8 +911,8 @@ spdif-sound {
 				hactive = <800>;
 				vactive = <1280>;
 				hback-porch = <5>;
-				hfront-porch = <5>;
-				vback-porch = <20>;
+				hfront-porch = <20>;
+				vback-porch = <5>;
 				vfront-porch = <20>;
 				hsync-len = <2>;
 				vsync-len = <2>;
