@@ -900,14 +900,14 @@ spdif-sound {
 	    39 7F 04 FF 98 81 00  // Set to Page 0 Command	    
 	    05 7F 01 11           // Sleep Out
 	    05 7F 01 29           // Set Display On 
-            05 7F 01 23           // Set All Pixels On
+           // 05 7F 01 23           // Set All Pixels On
         ];
 
 		display-timings {
 			native-mode = <&timing0>;
 
 			timing0: timing0 {
-				clock-frequency = <80000000>;
+				clock-frequency = <70000000>;
 				hactive = <800>;
 				vactive = <1280>;
 				hback-porch = <5>;
@@ -918,7 +918,7 @@ spdif-sound {
 				vsync-len = <2>;
 				hsync-active = <0>;
 				vsync-active = <0>;
-				de-active = <0>;
+				de-active = <1>;
 				pixelclk-active = <0>;
 			};
 		};
